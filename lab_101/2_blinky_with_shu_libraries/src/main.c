@@ -33,6 +33,8 @@ int main()
   
   // initialise the gpio pins
   init_gpio(ledr, OUTPUT);
+	init_gpio(ledo, OUTPUT);
+	init_gpio(ledg, OUTPUT);
   
   // loop forever ...
   while(1)
@@ -42,5 +44,27 @@ int main()
     
     // wait for 1 second
     HAL_Delay(1000);
+		
+		//toggle orange on
+		toggle_gpio(ledo);
+		
+		//wait 1 sec
+		HAL_Delay(1000);
+		
+		//toggle red/orange off, green on
+		toggle_gpio(ledo);
+		toggle_gpio(ledr);
+	  toggle_gpio(ledg);		
+		
+		//wait 1 sec
+		HAL_Delay(1000);
+		
+		//toggle green off, orange on
+		toggle_gpio(ledo);
+		toggle_gpio(ledr);
+	  toggle_gpio(ledg);	
+		
+		//wait 1 sec
+		HAL_Delay(1000);
   }
 }
