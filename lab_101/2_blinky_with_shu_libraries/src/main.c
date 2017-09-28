@@ -19,7 +19,9 @@
 #include "gpio.h"
 
 // map the led to GPIO PI1 (again, this is the inbuilt led)
-gpio_pin_t led = {PI_1, GPIOI, GPIO_PIN_1};
+gpio_pin_t ledr = {PI_1, GPIOI, GPIO_PIN_1};
+gpio_pin_t ledo = {PB_14, GPIOB, GPIO_PIN_14};
+gpio_pin_t ledg = {PB_15, GPIOB, GPIO_PIN_15};
 
 // this is the main method
 int main()
@@ -30,13 +32,13 @@ int main()
   init_sysclk_216MHz();
   
   // initialise the gpio pins
-  init_gpio(led, OUTPUT);
+  init_gpio(ledr, OUTPUT);
   
   // loop forever ...
   while(1)
   {
     // toggle the led on the gpio pin
-    toggle_gpio(led);
+    toggle_gpio(ledr);
     
     // wait for 1 second
     HAL_Delay(1000);
