@@ -39,32 +39,36 @@ int main()
   // loop forever ...
   while(1)
   {
-    // toggle the led on the gpio pin
-    toggle_gpio(ledr);
-    
+    // Set R on G and O Off
+    write_gpio(ledo, LOW);
+		write_gpio(ledr, HIGH);
+	  write_gpio(ledg, LOW);
+		
     // wait for 1 second
-    HAL_Delay(1000);
+    HAL_Delay(5000);
 		
-		//toggle orange on
-		toggle_gpio(ledo);
-		
-		//wait 1 sec
-		HAL_Delay(1000);
-		
-		//toggle red/orange off, green on
-		toggle_gpio(ledo);
-		toggle_gpio(ledr);
-	  toggle_gpio(ledg);		
+		//Set R and O on, G Off
+		write_gpio(ledo,HIGH);
+		write_gpio(ledr, HIGH);
+	  write_gpio(ledg, LOW);
 		
 		//wait 1 sec
-		HAL_Delay(1000);
+		HAL_Delay(5000);
 		
-		//toggle green off, orange on
-		toggle_gpio(ledo);
-		toggle_gpio(ledr);
-	  toggle_gpio(ledg);	
+		// Set red/orange off, green on
+		write_gpio(ledo, LOW);
+		write_gpio(ledr, LOW);
+	  write_gpio(ledg, HIGH);		
 		
 		//wait 1 sec
-		HAL_Delay(1000);
+		HAL_Delay(5000);
+		
+		// Set G and R Off, O on
+		write_gpio(ledo, HIGH);
+		write_gpio(ledr, LOW);
+	  write_gpio(ledg, LOW);	
+		
+		//wait 1 sec
+		HAL_Delay(5000);
   }
 }
