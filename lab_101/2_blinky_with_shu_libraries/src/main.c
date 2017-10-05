@@ -17,17 +17,19 @@
 #include "pinmappings.h"
 #include "clock.h"
 #include "gpio.h"
+#include "random_numbers.h"
 
-// Map Light 1 LEDs
-gpio_pin_t ledr = {PI_1, GPIOI, GPIO_PIN_1};
-gpio_pin_t ledo = {PB_14, GPIOB, GPIO_PIN_14};
-gpio_pin_t ledg = {PB_15, GPIOB, GPIO_PIN_15};
+// Map 6 LEDs
+gpio_pin_t led1 = {PI_1, GPIOI, GPIO_PIN_1};
+gpio_pin_t led2 = {PB_14, GPIOB, GPIO_PIN_14};
+gpio_pin_t led3 = {PB_15, GPIOB, GPIO_PIN_15};
+gpio_pin_t led4 = {PI_0, GPIOI, GPIO_PIN_0};
+gpio_pin_t led5 = {PB_8, GPIOB, GPIO_PIN_8};
+gpio_pin_t led6 = {PB_9, GPIOB, GPIO_PIN_9};
+// Map Button
+gpio_pin_t pb1 = {PI_0, GPIOI, GPIO_PIN_0}; 
 
-// Map Light 2 LEDs
-gpio_pin_t ledr2 = {PI_0, GPIOI, GPIO_PIN_0};
-gpio_pin_t ledo2 = {PB_8, GPIOB, GPIO_PIN_8};
-gpio_pin_t ledg2 = {PB_9, GPIOB, GPIO_PIN_9};
-
+int rnd;
 // this is the main method
 int main()
 {
@@ -37,73 +39,55 @@ int main()
   init_sysclk_216MHz();
   
   // initialise the gpio pins
-  init_gpio(ledr, OUTPUT);
-	init_gpio(ledo, OUTPUT);
-	init_gpio(ledg, OUTPUT);
-	init_gpio(ledr2, OUTPUT);
-	init_gpio(ledo2, OUTPUT);
-	init_gpio(ledg2, OUTPUT);
-  
+  init_gpio(led1, OUTPUT);
+	init_gpio(led2, OUTPUT);
+	init_gpio(led3, OUTPUT);
+	init_gpio(led4, OUTPUT);
+	init_gpio(led5, OUTPUT);
+	init_gpio(led6, OUTPUT);
+  init_gpio(pb1, INPUT);
+	
   // loop forever ...
   while(1)
   {
-    // Set 1 R on G and O Off
-    write_gpio(ledo, LOW);
-		write_gpio(ledr, HIGH);
-	  write_gpio(ledg, LOW);
+		if(read_gpio(pb1))
+    {
 		
-		//Set 2 R and O on, G Off
-		write_gpio(ledo2,HIGH);
-		write_gpio(ledr2, HIGH);
-	  write_gpio(ledg2, LOW);
+			write_gpio(led1, LOW);
+			write_gpio(led2, LOW);
+			write_gpio(led3, LOW);
+			write_gpio(led4, LOW);
+			write_gpio(led5, LOW);
+			write_gpio(led6, LOW);
+			
+			uint32_t rnd = (get_random_int() % 6) + 1;
+				if (rnd==1)
+				{
+				 write_gpio(led1, HIGH);
+				}
+				else if (rnd==2)
+				{
+				 write_gpio(led2, HIGH);
+				}
+				else if (rnd==3)
+				{
+				 write_gpio(led3, HIGH);
+				}
+				else if (rnd==4)
+				{
+				 write_gpio(led4, HIGH);
+				}
+				else if (rnd==5)
+				{
+				 write_gpio(led5, HIGH);
+				}
+				else
+				{
+				 write_gpio(led6, HIGH);
+				}
 		
-    // wait for 10 second
-    HAL_Delay(10000);
 		
-		//Set 2 R and O Off, G On
-		write_gpio(ledo2, LOW);
-		write_gpio(ledr2, LOW);
-	  write_gpio(ledg2, HIGH);
-		
-		//wait 10 sec
-		HAL_Delay(10000);
-		
-		//Set 2 R and G Off, O On
-		write_gpio(ledo2, HIGH);
-		write_gpio(ledr2, LOW);
-	  write_gpio(ledg2, LOW);	
-		
-		//wait 10 sec
-		HAL_Delay(10000);
-		
-		//Set 2 O and G Off, R On
-		write_gpio(ledo2, LOW);
-		write_gpio(ledr2, HIGH);
-	  write_gpio(ledg2, LOW);	
-		
-		// Set O and R On, G Off
-		write_gpio(ledo, HIGH);
-		write_gpio(ledr, HIGH);
-	  write_gpio(ledg, LOW);	
-		
-		//wait 10 sec
-		HAL_Delay(10000);
-		
-		// Set O and R Off, G On
-		write_gpio(ledo, LOW);
-		write_gpio(ledr, LOW);
-	  write_gpio(ledg, HIGH);	
-		
-		//wait 10 sec
-		HAL_Delay(10000);
-		
-		// Set G and R Off, O On
-		write_gpio(ledo, HIGH);
-		write_gpio(ledr, LOW);
-	  write_gpio(ledg, LOW);	
-		
-		//wait 10 sec
-		HAL_Delay(10000);
+		}
 		
   }
 }
