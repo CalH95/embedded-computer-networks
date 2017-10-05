@@ -410,6 +410,11 @@
               <FileType>2</FileType>
               <FilePath>.\startup_stm32f746xx.s</FilePath>
             </File>
+            <File>
+              <FileName>random_numbers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\libraries\bsp\stm32f7_discovery_shu_kit\inc\random_numbers.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -854,6 +859,11 @@
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\libraries\bsp\stm32f7_discovery_shu_kit\src\gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>random_numbers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\libraries\bsp\stm32f7_discovery_shu_kit\src\random_numbers.c</FilePath>
             </File>
           </Files>
         </Group>

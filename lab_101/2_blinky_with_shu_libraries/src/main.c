@@ -26,10 +26,9 @@ gpio_pin_t led3 = {PB_15, GPIOB, GPIO_PIN_15};
 gpio_pin_t led4 = {PI_0, GPIOI, GPIO_PIN_0};
 gpio_pin_t led5 = {PB_8, GPIOB, GPIO_PIN_8};
 gpio_pin_t led6 = {PB_9, GPIOB, GPIO_PIN_9};
-// Map Button
-gpio_pin_t pb1 = {PI_0, GPIOI, GPIO_PIN_0}; 
 
-int rnd;
+
+
 // this is the main method
 int main()
 {
@@ -37,6 +36,7 @@ int main()
   // properly
   HAL_Init();
   init_sysclk_216MHz();
+	init_random();
   
   // initialise the gpio pins
   init_gpio(led1, OUTPUT);
@@ -45,14 +45,12 @@ int main()
 	init_gpio(led4, OUTPUT);
 	init_gpio(led5, OUTPUT);
 	init_gpio(led6, OUTPUT);
-  init_gpio(pb1, INPUT);
+
 	
   // loop forever ...
   while(1)
   {
-		if(read_gpio(pb1))
-    {
-		
+
 			write_gpio(led1, LOW);
 			write_gpio(led2, LOW);
 			write_gpio(led3, LOW);
@@ -86,8 +84,8 @@ int main()
 				 write_gpio(led6, HIGH);
 				}
 		
+		 HAL_Delay(5000);
 		
-		}
 		
   }
 }
