@@ -18,7 +18,7 @@
 #include "clock.h"
 #include "gpio.h"
 
-// map the led to GPIO PI1 (again, this is the inbuilt led)
+// Map LEDs
 gpio_pin_t ledr = {PI_1, GPIOI, GPIO_PIN_1};
 gpio_pin_t ledo = {PB_14, GPIOB, GPIO_PIN_14};
 gpio_pin_t ledg = {PB_15, GPIOB, GPIO_PIN_15};
