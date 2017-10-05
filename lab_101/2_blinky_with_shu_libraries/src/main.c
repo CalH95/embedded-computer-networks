@@ -44,31 +44,31 @@ int main()
 		write_gpio(ledr, HIGH);
 	  write_gpio(ledg, LOW);
 		
-    // wait for 1 second
-    HAL_Delay(5000);
+    // wait for 10 second
+    HAL_Delay(10000);
 		
 		//Set R and O on, G Off
 		write_gpio(ledo,HIGH);
 		write_gpio(ledr, HIGH);
 	  write_gpio(ledg, LOW);
 		
-		//wait 1 sec
-		HAL_Delay(5000);
+		//wait 10 sec
+		HAL_Delay(10000);
 		
 		// Set red/orange off, green on
 		write_gpio(ledo, LOW);
 		write_gpio(ledr, LOW);
 	  write_gpio(ledg, HIGH);		
 		
-		//wait 1 sec
-		HAL_Delay(5000);
+		//wait 10 sec
+		HAL_Delay(10000);
 		
 		// Set G and R Off, O on
 		write_gpio(ledo, HIGH);
 		write_gpio(ledr, LOW);
 	  write_gpio(ledg, LOW);	
 		
-		//wait 1 sec
-		HAL_Delay(5000);
+		//wait 10 sec
+		HAL_Delay(10000);
   }
 }
