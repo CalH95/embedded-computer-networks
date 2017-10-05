@@ -18,10 +18,15 @@
 #include "clock.h"
 #include "gpio.h"
 
-// Map LEDs
+// Map Light 1 LEDs
 gpio_pin_t ledr = {PI_1, GPIOI, GPIO_PIN_1};
 gpio_pin_t ledo = {PB_14, GPIOB, GPIO_PIN_14};
 gpio_pin_t ledg = {PB_15, GPIOB, GPIO_PIN_15};
+
+// Map Light 2 LEDs
+gpio_pin_t ledr2 = {PI_0, GPIOI, GPIO_PIN_0};
+gpio_pin_t ledo2 = {PB_8, GPIOB, GPIO_PIN_8};
+gpio_pin_t ledg2 = {PB_9, GPIOB, GPIO_PIN_9};
 
 // this is the main method
 int main()
@@ -35,40 +40,70 @@ int main()
   init_gpio(ledr, OUTPUT);
 	init_gpio(ledo, OUTPUT);
 	init_gpio(ledg, OUTPUT);
+	init_gpio(ledr2, OUTPUT);
+	init_gpio(ledo2, OUTPUT);
+	init_gpio(ledg2, OUTPUT);
   
   // loop forever ...
   while(1)
   {
-    // Set R on G and O Off
+    // Set 1 R on G and O Off
     write_gpio(ledo, LOW);
 		write_gpio(ledr, HIGH);
 	  write_gpio(ledg, LOW);
 		
+		//Set 2 R and O on, G Off
+		write_gpio(ledo2,HIGH);
+		write_gpio(ledr2, HIGH);
+	  write_gpio(ledg2, LOW);
+		
     // wait for 10 second
     HAL_Delay(10000);
 		
-		//Set R and O on, G Off
-		write_gpio(ledo,HIGH);
-		write_gpio(ledr, HIGH);
-	  write_gpio(ledg, LOW);
+		//Set 2 R and O Off, G On
+		write_gpio(ledo2, LOW);
+		write_gpio(ledr2, LOW);
+	  write_gpio(ledg2, HIGH);
 		
 		//wait 10 sec
 		HAL_Delay(10000);
 		
-		// Set red/orange off, green on
+		//Set 2 R and G Off, O On
+		write_gpio(ledo2, HIGH);
+		write_gpio(ledr2, LOW);
+	  write_gpio(ledg2, LOW);	
+		
+		//wait 10 sec
+		HAL_Delay(10000);
+		
+		//Set 2 O and G Off, R On
+		write_gpio(ledo2, LOW);
+		write_gpio(ledr2, HIGH);
+	  write_gpio(ledg2, LOW);	
+		
+		// Set O and R On, G Off
+		write_gpio(ledo, HIGH);
+		write_gpio(ledr, HIGH);
+	  write_gpio(ledg, LOW);	
+		
+		//wait 10 sec
+		HAL_Delay(10000);
+		
+		// Set O and R Off, G On
 		write_gpio(ledo, LOW);
 		write_gpio(ledr, LOW);
-	  write_gpio(ledg, HIGH);		
+	  write_gpio(ledg, HIGH);	
 		
 		//wait 10 sec
 		HAL_Delay(10000);
 		
-		// Set G and R Off, O on
+		// Set G and R Off, O On
 		write_gpio(ledo, HIGH);
 		write_gpio(ledr, LOW);
 	  write_gpio(ledg, LOW);	
 		
 		//wait 10 sec
 		HAL_Delay(10000);
+		
   }
 }
