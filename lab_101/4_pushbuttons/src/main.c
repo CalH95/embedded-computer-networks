@@ -41,13 +41,17 @@ int main()
     // if the button is pressed ...
     if(read_gpio(pb1))
     {
-      // turn the led on on the gpio pin
-      write_gpio(led, HIGH);
-    }
-    else
-    {
-      // turn the led off on the gpio pin
-      write_gpio(led, LOW);
-    }
+			//Delay 50
+			HAL_Delay(75);
+			
+			//read again
+			if(read_gpio(pb1))
+			{
+			
+				// toggle the led on the gpio pin
+				toggle_gpio(led);
+    
+			}
+		}
   }
 }
