@@ -25,7 +25,6 @@ gpio_pin_t led2 = {PI_1, GPIOI, GPIO_PIN_1};
 gpio_pin_t led3 = {PI_2, GPIOI, GPIO_PIN_2};
 gpio_pin_t pb1 = {PA_8, GPIOA, GPIO_PIN_8};
 
-int ledCounter = 1;
 
 // this is the main method
 int main()
@@ -53,26 +52,30 @@ int main()
 			//read again
 			if(read_gpio(pb1))
 			{
-				if(ledCounter==1){
+
 					
-				// LED 1 on, counter 2
+				// Cycle
 				write_gpio(led1, HIGH);
 				write_gpio(led2, LOW);
 				write_gpio(led3, LOW);
-				ledCounter=2;
-				}
-				else if(ledCounter==2){
+
+				HAL_Delay(500);
+
 				write_gpio(led1, LOW);
 				write_gpio(led2, HIGH);
 				write_gpio(led3, LOW);
-				ledCounter=3;	
-				}
-				else if(ledCounter==3){
+	
+				HAL_Delay(500);
+
 				write_gpio(led1, LOW);
 				write_gpio(led2, LOW);
 				write_gpio(led3, HIGH);
-				ledCounter=1;	
-				}	
+	
+				HAL_Delay(500);	
+				
+				write_gpio(led1, LOW);
+				write_gpio(led2, LOW);
+				write_gpio(led3, LOW);				
 				
 			}
 		}
