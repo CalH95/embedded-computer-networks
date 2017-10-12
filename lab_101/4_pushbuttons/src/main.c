@@ -20,8 +20,12 @@
 
 // map the led to GPIO PI_1 (the inbuilt led) and the push button to PI_11 
 // (the user button)
-gpio_pin_t led = {PI_1, GPIOI, GPIO_PIN_1};
+gpio_pin_t led1 = {PA_15, GPIOA, GPIO_PIN_15};
+gpio_pin_t led2 = {PI_1, GPIOI, GPIO_PIN_1};
+gpio_pin_t led3 = {PI_2, GPIOI, GPIO_PIN_2};
 gpio_pin_t pb1 = {PA_8, GPIOA, GPIO_PIN_8};
+
+int ledCounter = 1;
 
 // this is the main method
 int main()
@@ -32,7 +36,9 @@ int main()
   init_sysclk_216MHz();
   
   // initialise the gpio pins
-  init_gpio(led, OUTPUT);
+  init_gpio(led1, OUTPUT);
+	init_gpio(led2, OUTPUT);
+	init_gpio(led3, OUTPUT);
   init_gpio(pb1, INPUT);
   
   // loop forever ...
@@ -47,10 +53,27 @@ int main()
 			//read again
 			if(read_gpio(pb1))
 			{
-			
-				// toggle the led on the gpio pin
-				toggle_gpio(led);
-    
+				if(ledCounter==1){
+					
+				// LED 1 on, counter 2
+				write_gpio(led1, HIGH);
+				write_gpio(led2, LOW);
+				write_gpio(led3, LOW);
+				ledCounter=2;
+				}
+				else if(ledCounter==2){
+				write_gpio(led1, LOW);
+				write_gpio(led2, HIGH);
+				write_gpio(led3, LOW);
+				ledCounter=3;	
+				}
+				else if(ledCounter==3){
+				write_gpio(led1, LOW);
+				write_gpio(led2, LOW);
+				write_gpio(led3, HIGH);
+				ledCounter=1;	
+				}	
+				
 			}
 		}
   }
