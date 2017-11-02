@@ -15,6 +15,11 @@
 #include "pinmappings.h"
 #include "clock.h"
 #include "stm32746g_discovery_lcd.h"
+#include "adc.h"
+#include "gpio.h"
+
+gpio_pin_t pot = {PA_0, GPIOA, GPIO_PIN_0};
+
 
 // LCD DEFINES
 
