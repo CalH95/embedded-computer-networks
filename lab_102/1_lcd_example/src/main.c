@@ -73,11 +73,12 @@ int main()
   {
 		uint16_t adc_val = read_adc(pot);
     // format a string based around the uptime counter
-    sprintf(adc_val, "%d s", counter++);
+    char str[20];
+    sprintf(str, "%d s", adc_val);
     
     // print the message to the lcd
     BSP_LCD_ClearStringLine(6);
-    BSP_LCD_DisplayStringAtLine(6, (uint8_t *)adc_val);
+    BSP_LCD_DisplayStringAtLine(6, (uint8_t *)str);
     
     HAL_Delay(1000);
   }
