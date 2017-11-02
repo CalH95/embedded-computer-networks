@@ -18,9 +18,9 @@
 #include "adc.h"
 #include "gpio.h"
 
-gpio_pin_t pot = {PA_0, GPIOA, GPIO_PIN_0};
+gpio_pin_t pot = {PF_8, GPIOF, GPIO_PIN_8};
 
-
+//test
 // LCD DEFINES
 
 // define a message boarder (note the lcd is 28 characters wide using Font24)
@@ -42,6 +42,7 @@ int main()
   // properly
   HAL_Init();
   init_sysclk_216MHz();
+	init_adc(pot);
   
   // initialise the lcd
   BSP_LCD_Init();
@@ -70,13 +71,13 @@ int main()
   int counter = 0;
   while(1)
   {
+		uint16_t adc_val = read_adc(pot);
     // format a string based around the uptime counter
-    char str[20];
-    sprintf(str, "%d s", counter++);
+    sprintf(adc_val, "%d s", counter++);
     
     // print the message to the lcd
     BSP_LCD_ClearStringLine(6);
-    BSP_LCD_DisplayStringAtLine(6, (uint8_t *)str);
+    BSP_LCD_DisplayStringAtLine(6, (uint8_t *)adc_val);
     
     HAL_Delay(1000);
   }
