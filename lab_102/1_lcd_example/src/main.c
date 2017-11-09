@@ -55,6 +55,10 @@ int main()
   
   // set the font to use
   BSP_LCD_SetFont(&Font24); 
+	
+	// Bar Stuff
+	
+	
   
   // print the welcome message ...
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
@@ -66,20 +70,30 @@ int main()
   // delay a little ...
   HAL_Delay(5000);
   
-  // display an "uptime" counter
-  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)"Current uptime =");
-  int counter = 0;
+
   while(1)
   {
+		BSP_LCD_Clear(LCD_COLOR_BLUE);
+		BSP_LCD_DisplayStringAtLine(0, (uint8_t *)BOARDER);
+		BSP_LCD_DisplayStringAtLine(1, (uint8_t *)welcome_message[0]);
+		BSP_LCD_DisplayStringAtLine(2, (uint8_t *)welcome_message[1]);
+		BSP_LCD_DisplayStringAtLine(3, (uint8_t *)BOARDER); 
+		
 		uint16_t adc_val = read_adc(pot);
+		adc_val = (adc_val-20)/40;
+		
+		
     // format a string based around the uptime counter
     char str[20];
-    sprintf(str, "%d s", adc_val);
+    sprintf(str, "%d Percent", adc_val);
     
     // print the message to the lcd
     BSP_LCD_ClearStringLine(6);
     BSP_LCD_DisplayStringAtLine(6, (uint8_t *)str);
-    
+		
+		BSP_LCD_FillRect(20, 220, (adc_val*4.3), 30);
+		
+		
     HAL_Delay(1000);
   }
 }
